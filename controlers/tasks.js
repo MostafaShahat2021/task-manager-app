@@ -32,7 +32,7 @@ const getTask = async (req, res) => {
 const deleteTask = async (req, res) => {
   try {
     const { id: taskID } = req.params;
-    const task = await Task.findOneAndDelete({ _id: taskID });
+    const task = await Task.findOneAndDelete({ _id: taskID }, {includeResultMetadata: true});
     if (!task) {
       return res.status(404).json({ msg: `No task found with id: ${taskID}` });
     }
@@ -49,6 +49,7 @@ const updateTask = async (req, res) => {
     const task = await Task.findOneAndUpdate({ _id: taskID }, req.body, {
       new: true,
       newValidators: true,
+      includeResultMetadata: true,
     });
     if (!task) {
       return res.status(404).json({ msg: `No task found with id: ${taskID}` });
