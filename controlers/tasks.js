@@ -43,7 +43,6 @@ const deleteTask = async (req, res) => {
 };
 
 const updateTask = async (req, res) => {
-  // res.status(200).json({id: taskID, data: req.body  });
   try {
     const { id: taskID } = req.params;
     const task = await Task.findOneAndUpdate({ _id: taskID }, req.body, {
